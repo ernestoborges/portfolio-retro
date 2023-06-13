@@ -2,6 +2,7 @@
 import styled from "styled-components"
 import { PageHeader } from "./components/PageHeader/Header"
 import { Home } from "./components/Home/Home"
+import { Projects } from "./components/Projects/Projects"
 export default function App() {
 
   return (
@@ -9,6 +10,7 @@ export default function App() {
       <Container>
         <PageHeader />
         <Home />
+        <Projects />
       </Container>
     </>
   )
@@ -17,5 +19,6 @@ export default function App() {
 const Container = styled.div`
   height: 100%;
   position: relative;
-  padding-top: 6rem;s
+  padding-top: 6rem;
+
 `

@@ -24,9 +24,7 @@ export function Home() {
             <Container>
                 <Background>
                     <Sky>
-                        {/* <Mountain width={windowWidth} speed="20" elementColor=""/>
-                        <Mountain width={windowWidth} speed="30" elementColor="rgb(11 15 59)"/>
-                        <Mountain width={windowWidth} speed="40" elementColor="rgb(148 37 99)"/> */}
+
                         <Mountain width={windowWidth} speed="80">
                             <MountainSVG elementColor="rgb(148 37 99)" />
                             <MountainSVG elementColor="rgb(148 37 99)" />
@@ -59,15 +57,28 @@ export function Home() {
                 <TextContainer>
                     <TextWrapper>
                         <h1>
+                            <TextRage>
+                                <span>P</span>
+                                <span>O</span>
+                                <span>R</span>
+                                <span>T</span>
+                                <span>F</span>
+                                <span>O</span>
+                                <span>L</span>
+                                <span>I</span>
+                                <span>O</span>
+                            </TextRage>
                             <TextSpan dataText="DESENVOLVEDOR">
                                 DESENVOLVEDOR
                             </TextSpan>
                             <TextSpan dataText="FRONTEND">
                                 FRONTEND
                             </TextSpan>
+                            <TextName dataText="Ernesto Borges">Ernesto Borges</TextName>
                         </h1>
                     </TextWrapper>
                 </TextContainer>
+                <Overlay />
 
             </Container>
         </>
@@ -81,6 +92,18 @@ const Container = styled.div`
     justify-content: center;
     position: relative;
     overflow: hidden;
+`
+
+const Overlay = styled.div`
+
+    width:100%;
+    height:100%;
+    z-index:9999;
+    position:absolute;
+    left:0;
+    top:0;
+    background-image: repeating-linear-gradient(rgba(0,0,0,0.3) 0,transparent 1px,transparent 2px,rgba(0,0,0,0.3) 3px);
+    pointer-events: none
 `
 
 const Sun = styled.div`
@@ -103,7 +126,8 @@ const Sun = styled.div`
         -50% 87%,150% 87%,150% 90%,0 90%,
         -50% 92%,150% 92%,150% 95%,0 95%,
         -50% 96%,150% 96%,150% 150%,0 150%);
-        box-shadow: rgba(255,128,0,0.7) 0px 0 20px;
+
+    box-shadow: rgba(255,128,0,0.7) 0px 0 20px;
 `
 
 const TextContainer = styled.div`
@@ -129,6 +153,43 @@ const TextWrapper = styled.div`
             font-size: 8rem;
         }
     }    
+`
+
+const TextRage = styled.span`
+    font-family: 'Gugi', sans-serif;
+    font-size: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    
+    & > span {
+        width: 1.4rem;
+        text-align: center;
+    }
+`
+
+const TextName = styled.span<{ dataText: string }>`
+    font-size: 3.6rem;
+    font-family: 'Vacations Paradise', sans-serif;
+    color: #fff;
+    text-shadow: rgba(255,255,255,0.7) 0px 0 20px;
+    transform: rotate(-6deg) translate(0, -10%);
+    position: relative;
+
+
+    &::before {
+        position: absolute;
+        top: -0.2rem;
+        left: -0.3rem;
+        z-index: -1;
+
+        content: "${(props) => props.dataText}";
+        opacity:1;
+        color: #09C8DA;
+        text-shadow: rgba(9,20,218,0.7) 0px 0 20px;
+        white-space: nowrap;
+        
+    }
 `
 
 const TextSpan = styled.span<{ dataText: string }>`
@@ -158,7 +219,7 @@ const TextSpan = styled.span<{ dataText: string }>`
         -webkit-background-clip:text;
         z-index:999;
         background-size: 400% 400%;
-        animation:shine 5s normal ease infinite;
+        animation: shine 5s normal ease infinite;
     }
 
     @keyframes shine{
@@ -181,7 +242,7 @@ const Sky = styled.div`
     position: relative;
 `
 
-const Mountain = styled.div<{width: number; speed: string}>`
+const Mountain = styled.div<{ width: number; speed: string }>`
     position: absolute;
     bottom: 0;
     left: 0;
@@ -208,6 +269,7 @@ const Grid = styled.div`
     width: 100%;
     height: 40%;
     position: relative;
+    z-index: 1;
 
     background-color: #0c1142;
 
