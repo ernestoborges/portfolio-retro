@@ -23,7 +23,7 @@ export function ProjectsList() {
 
 const List = styled.ul`
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-columns: repeat(auto-fill, 310px);
     row-gap: 3rem;
     column-gap: 1rem;
     grid-auto-flow: dense;
