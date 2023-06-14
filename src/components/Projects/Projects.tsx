@@ -18,7 +18,7 @@ export function Projects(){
 }
 
 const Container = styled.div`
-  background-color: #000;
+  background-color: #101010;
 
 `
 
