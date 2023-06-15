@@ -13,6 +13,10 @@ interface IProps {
             tablet: boolean
             desktop: boolean
         }
+        skills: {
+            name: string;
+            icon: () => JSX.Element;
+        }[]
     }
 }
 
@@ -39,12 +43,18 @@ export function ProjectItem({ itemData }: IProps) {
                     </span>
                 </Header>
                 <SubHeader>
-                    <a href="">
-                        <AiOutlineGithub />
-                    </a>
-                    <a href="">
-                        <AiOutlineLink />
-                    </a>
+                    <SkillsContainer>
+                        <ul>
+                            {
+                                Array(...itemData.skills, ...itemData.skills).map((skill, index) =>
+                                    <li key={index}>
+                                        <span>{skill.icon()}</span>
+                                        <span>{skill.name}</span>
+                                    </li>
+                                )
+                            }
+                        </ul>
+                    </SkillsContainer>
                 </SubHeader>
                 <PreviewSection>
 
@@ -86,7 +96,30 @@ export function ProjectItem({ itemData }: IProps) {
                         </DevicesWrapper>
                     </DevicesContainer>
                 </PreviewSection>
-
+                <InfoSection>
+                    <InfoButtonContainer>
+                        <InfoButton>
+                            i
+                        </InfoButton>
+                        <div className="dotted-border"></div>
+                        <div className="radius-borders">
+                            <div>
+                                <div />
+                                <div />
+                                <div />
+                                <div />
+                            </div>
+                        </div>
+                    </InfoButtonContainer>
+                    <LinksContainer>
+                        <a href="">
+                            <AiOutlineGithub />
+                        </a>
+                        <a href="">
+                            <AiOutlineLink />
+                        </a>
+                    </LinksContainer>
+                </InfoSection>
                 <Overlay />
             </Item>
         </>
@@ -128,7 +161,6 @@ const Header = styled.div`
 `
 
 const SubHeader = styled.div`
-    color: rgba(148, 37, 99, 1);
     
     text-shadow: 0 0 10px rgba(255,255,0, 1);
 
@@ -140,17 +172,27 @@ const SubHeader = styled.div`
     gap: 1rem;
 
     font-family: Gugi, sans-serif;
-    font-size: 3rem;
-    padding: 0.4rem 2rem;
+    padding: 0.4rem 2rem 0.4rem 1rem;
+
+   
+`
+
+const LinksContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
     & > a {
+
+        font-size: 3rem;
+        color: rgba(148, 37, 99, 1);
         width: 4rem;
         height: 4rem;
 
         display: flex;
         align-items: center;
         justify-content: center;
-
+        
         & > svg {
             color: rgba(169, 0, 255, 0.6);
             filter: drop-shadow(0 0 2px rgba(169, 0, 255, 1));
@@ -220,7 +262,6 @@ const DevicesWrapper = styled.div<{ selectedDevice: number }>`
 `
 
 const DevicesContainer = styled.div`
-
     width: 24rem;
     display: flex;
     align-items: center;
@@ -307,7 +348,6 @@ const BottomTriangle = styled(GoTriangleUp)`
     left: 100%;
     transform: translate(-50%, -50%) rotate(-90deg);
     filter: drop-shadow(0 0 1px rgba(9, 200, 218, 1));
-
 `
 
 const DeviceSelectorButton = styled.div<{ isSelected: boolean }>`
@@ -320,11 +360,169 @@ const DeviceSelectorButton = styled.div<{ isSelected: boolean }>`
     color: ${(props) => props.isSelected ? "rgba(255,255,0,1)" : "rgba(255,255,0,0.4)"};
 
     & svg {
-        filter: ${(props) => props.isSelected
-            ? "drop-shadow(0 0 2px rgba(255, 255, 0, 0.7))"
-            : "drop-shadow(0 0 0 rgba(255, 255, 0, 0.7))"};
-            font-size: 4rem;
-            transition: 0.3s filter;
+        filter: ${(props) => props.isSelected ? "drop-shadow(0 0 2px rgba(255, 255, 0, 0.7))" : "drop-shadow(0 0 0 rgba(255, 255, 0, 0.7))"};
+        font-size: 4rem;
+        transition: 0.3s filter;
     }
-    
+`
+
+const InfoSection = styled.div`
+    padding: 0.4rem 2rem 0.4rem 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+const SkillsContainer = styled.div`
+
+    width: 28.8rem;
+    height: 2.6rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+
+    & > ul {
+        display: flex;
+        gap: 2rem;
+        position: absolute;
+        left: 0;
+
+        animation: scroll 10s linear infinite;
+
+        @keyframes scroll {
+            from {transform: translateX(0)}
+            to {transform: translateX(-51%)}
+        }
+
+        & > li {
+            display: flex;
+            gap: 0.4rem;
+
+            font-size: 1.6rem;
+            font-family: Gugi, sans-serif;
+            font-weight: 400;
+
+            & > span {
+                display: flex;
+                align-items: center;
+                color: rgba(9, 200, 218, 1);
+                text-shadow: 0 0 10px rgba(9, 200, 218, 1);
+
+                & > svg {
+                    filter: drop-shadow(0 0 2px rgba(9, 200, 218, 1));
+                }
+            }
+        }
+    }
+`
+
+const InfoButtonContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+
+    & > .dotted-border {
+        width: 80%;
+        height: 80%;
+        position: absolute;
+
+        
+        box-shadow:  rgba(255,255,0, 0.2) 0 0 10px;
+
+        border: 0.2rem dashed rgba(255,255,0, 1);
+        border-radius: 100%;
+        transition: 0.3s transform ease-out;
+    }
+
+    & > .radius-borders {
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        & > div {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            & > div {
+                width: 50%;
+                height: 50%;
+                position: absolute;
+                border: 2px solid rgba(9, 200, 218, 1);
+                transition: 0.3s transform;
+            }
+
+            & > div:nth-child(1){  
+                top: 0;
+                left: 0;
+                border-right: 0;
+                border-bottom: 0;
+                border-radius: 100px 0 0 0;
+            }
+            div:nth-child(2){
+                top: 0;
+                right: 0;
+                border-left: 0;
+                border-bottom: 0;
+                border-radius:  0 100px 0 0;
+            }
+            div:nth-child(3){
+                bottom: 0;
+                right: 0;
+                border-left: 0;
+                border-top: 0;
+                border-radius:  0 0 100px 0;
+            }
+            div:nth-child(4){
+                bottom: 0;
+                left: 0;
+                border-right: 0;
+                border-top: 0;
+                border-radius:  0 0 0 100px;
+            }
+        }
+    }
+
+    :hover {
+        .dotted-border{
+            transform: rotate(calc(-360deg * 2));
+        }
+        .radius-borders {
+            & > div {
+                div:nth-child(1){
+                    transform: translate(-25%, -25%);
+                }
+                div:nth-child(2){
+                    transform: translate(25%, -25%);
+
+                }
+                div:nth-child(3){
+                    transform: translate(25%, 25%);
+
+                }
+                div:nth-child(4){
+                    transform: translate(-25%, 25%);
+                } 
+            }
+        }
+    }
+`
+
+const InfoButton = styled.div`
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Gugi, sans-serif;
+    color:rgba(255, 255, 255, 1);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
+    font-weight: bold;
 `
