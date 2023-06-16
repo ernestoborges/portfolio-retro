@@ -60,7 +60,7 @@ export function ProjectItem({ itemData }: IProps) {
                 <HorizontalRule />
                 <PreviewSection>
                     <DeviceSelectorContainer>
-                        <DeviceSelectorWrapper deviceListLength={deviceList.length}>
+                        <DeviceSelectorWrapper deviceListLength={deviceList.length} showInfo={showInfo}>
 
                             {
                                 deviceList.map((device, index) =>
@@ -79,6 +79,9 @@ export function ProjectItem({ itemData }: IProps) {
                                 </div>
                             </SelectorBox>
                         </DeviceSelectorWrapper>
+                        <AlertBar showInfo={showInfo}>
+                            <div></div>
+                        </AlertBar>
                     </DeviceSelectorContainer>
                     <DevicesContainer>
                         <DevicesWrapper
@@ -95,6 +98,7 @@ export function ProjectItem({ itemData }: IProps) {
                                 )
                             }
                         </DevicesWrapper>
+                        
                     </DevicesContainer>
                 </PreviewSection>
                 <HorizontalRule />
@@ -208,6 +212,7 @@ const SubHeader = styled.div`
     font-family: Gugi, sans-serif;
     padding: 0.4rem 1rem;
 `
+
 const SkillsContainer = styled.div`
 
     width: 28.8rem;
@@ -252,7 +257,6 @@ const SkillsContainer = styled.div`
     }
 `
 
-
 const Overlay = styled.div`
     width:100%;
     height:100%;
@@ -294,6 +298,7 @@ const DevicesWrapper = styled.div<{ selectedDevice: number }>`
 
 `
 
+
 const DevicesContainer = styled.div`
     width: 24rem;
     display: flex;
@@ -333,14 +338,58 @@ const DeviceSelectorContainer = styled.div`
     justify-content: center;
     height: 100%;
     align-items: center;
+
+    position: relative;
 `
 
-const DeviceSelectorWrapper = styled.div<{ deviceListLength: number }>`
+const DeviceSelectorWrapper = styled.div<{ deviceListLength: number; showInfo: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    height: ${props => props.deviceListLength * 40 + (props.deviceListLength - 1) * 10}px
+    height: ${props => props.deviceListLength * 40 + (props.deviceListLength - 1) * 10}px;
+
+    transform: rotateY(${props => props.showInfo ? "180" : "360"}deg);
+
+    transition: 0.3s transform;
+
+`
+
+const AlertBar = styled.div<{ showInfo: boolean }>`
+    width: 5.8rem;
+    height: 16rem;
+    background-color: rgb(16,16,16);
+    padding: 0 1rem;
+    position: absolute;
+    overflow: hidden;
+
+    transform: rotateY(${props => props.showInfo ? "360" : "180"}deg);
+    z-index: ${props => props.showInfo ? "0" : "-1"};
+
+    transition: 0.3s transform, 0.3s z-index;
+
+    & > div {
+        width: 100%;
+        height: 18.9rem;
+        box-shadow:  rgba(255,255,0, 0.4) 0 0 10px;
+        text-shadow: 0 0 10px rgba(255,255,0, 1);
+        background: repeating-linear-gradient(
+                                45deg,
+                                rgba(255,255,0, 1),
+                                rgba(255,255,0, 1) 10px,
+                                rgba(255,255,0, 0.2) 10px,
+                                rgba(255,255,0, 0.2) 20px
+                            );
+
+
+        animation: slide 1s linear infinite;
+        @keyframes slide {
+            from {transform: translateY(-2.8rem)}
+            to {transform: translateY(0)}
+        }
+        
+    }
+
 `
 
 const SelectorBox = styled.div<{ selectedDevice: number, deviceListLength: number }>`

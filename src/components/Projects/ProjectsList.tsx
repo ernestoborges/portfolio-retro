@@ -12,6 +12,7 @@ export function ProjectsList() {
             title: "Previsão do Tempo",
             folder: "addressweatherinfo",
             devices: { mobile: true, tablet: true, desktop: true },
+            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />}, 
                 {name: "typescript", icon: ()=> <TbBrandTypescript />}, 
@@ -24,6 +25,7 @@ export function ProjectsList() {
             title: "Calculadora de encontros DnD5e",
             folder: "dndencounter",
             devices: { mobile: true, tablet: true, desktop: true },
+            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />},
                 {name: "javascript", icon: ()=> <IoLogoReact />}, 
