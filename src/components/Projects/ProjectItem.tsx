@@ -24,6 +24,7 @@ export function ProjectItem({ itemData }: IProps) {
 
     const deviceList = Object.keys(itemData.devices).filter(key => itemData.devices[key as keyof typeof itemData.devices]);
     const [selectedDevice, setSelectedDevice] = useState(0);
+    const [showInfo, setShowInfo] = useState(false);
 
     function deviceIconHandler(device: string) {
         switch (device) {
@@ -98,8 +99,11 @@ export function ProjectItem({ itemData }: IProps) {
                 </PreviewSection>
                 <HorizontalRule />
                 <InfoSection>
-                    <InfoButtonContainer>
-                        <CircleWrapper>
+                    <InfoButtonContainer 
+                        showInfo={showInfo}
+                        onClick={()=>setShowInfo(!showInfo)}
+                    >
+                        <CircleWrapper showInfo={showInfo}>
                             <InfoButton>
                                 info
                             </InfoButton>
@@ -113,9 +117,11 @@ export function ProjectItem({ itemData }: IProps) {
                                 </div>
                             </div>
                         </CircleWrapper>
-                        <TextContainer>
+                        <TextContainer showInfo={showInfo}>
                             <div>
-                                MAIS
+                                <div>
+                                    {showInfo ? "MENOS" : "MAIS"}
+                                </div>
                             </div>
                         </TextContainer>
                     </InfoButtonContainer>
@@ -202,69 +208,50 @@ const SubHeader = styled.div`
     font-family: Gugi, sans-serif;
     padding: 0.4rem 1rem;
 `
+const SkillsContainer = styled.div`
 
-const LinksContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    border: 0.1rem solid #09C8DA;
-    box-shadow:  rgba(9, 200, 218, 0.7) 0 0 10px, inset 0 0 10px  rgb(9, 200, 218, 0.7);
-
-    & > div:first-child{
-        background-color:rgba(9, 200, 218, 0.4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Gugi, sans-serif;
-        gap: 1rem;
-        color: #09C8DA;
-
-        &> span{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-    
-`
-
-const LinksWrapper = styled.div`
+    width: 28.8rem;
+    height: 2.6rem;
     display: flex;
     align-items: center;
-    padding: 0.8rem;
-    gap: 0.4rem;
+    overflow: hidden;
+    position: relative;
 
-    & > a {
-
-        font-size: 3rem;
-        color: rgba(148, 37, 99, 1);
-        width: 4rem;
-        height: 4rem;
-
+    & > ul {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        & > svg {
-            color: rgba(169, 0, 255, 1);
-            filter: drop-shadow(0 0 2px rgba(169, 0, 255, 1));
+        gap: 2rem;
+        position: absolute;
+        left: 0;
+
+        animation: scroll 10s linear infinite;
+
+        @keyframes scroll {
+            from {transform: translateX(0)}
+            to {transform: translateX(-51%)}
         }
 
-        :hover {
-            background:
-            linear-gradient(to right, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 0,
-            linear-gradient(to right, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 100%,
-            linear-gradient(to left, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 0,
-            linear-gradient(to left, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 100%,
-            linear-gradient(to bottom, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 0,
-            linear-gradient(to bottom, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 0,
-            linear-gradient(to top, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 100%,
-            linear-gradient(to top, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 100%;
+        & > li {
+            display: flex;
+            gap: 0.4rem;
 
-            background-repeat: no-repeat;
-            background-size: 10px 10px;
+            font-size: 1.6rem;
+            font-family: Gugi, sans-serif;
+            font-weight: 400;
+
+            & > span {
+                display: flex;
+                align-items: center;
+                color: rgba(9, 200, 218, 1);
+                text-shadow: 0 0 10px rgba(9, 200, 218, 1);
+
+                & > svg {
+                    filter: drop-shadow(0 0 2px rgba(9, 200, 218, 1));
+                }
+            }
         }
     }
 `
+
 
 const Overlay = styled.div`
     width:100%;
@@ -276,6 +263,7 @@ const Overlay = styled.div`
     background-image: repeating-linear-gradient(rgba(0,0,0,0.3) 0,transparent 1px,transparent 2px,rgba(0,0,0,0.3) 3px);
     pointer-events: none
 `
+
 const PreviewSection = styled.div`
     width: 100%;
     display: flex;
@@ -416,52 +404,74 @@ const InfoSection = styled.div`
     margin-bottom: 1rem;
     width: 100%;
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: space-between;
 `
-const SkillsContainer = styled.div`
 
-    width: 28.8rem;
-    height: 2.6rem;
+const LinksContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 0.1rem solid #09C8DA;
+    box-shadow:  rgba(9, 200, 218, 0.7) 0 0 10px, inset 0 0 10px  rgb(9, 200, 218, 0.7);
+
+    & > div:first-child{
+        background-color:rgba(9, 200, 218, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Gugi, sans-serif;
+        gap: 1rem;
+        color: #09C8DA;
+
+        &> span{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    
+`
+
+const LinksWrapper = styled.div`
     display: flex;
     align-items: center;
-    overflow: hidden;
-    position: relative;
+    padding: 0.8rem;
+    gap: 0.4rem;
 
-    & > ul {
+    & > a {
+
+        font-size: 3rem;
+        color: rgba(148, 37, 99, 1);
+        width: 4rem;
+        height: 4rem;
+
         display: flex;
-        gap: 2rem;
-        position: absolute;
-        left: 0;
-
-        animation: scroll 10s linear infinite;
-
-        @keyframes scroll {
-            from {transform: translateX(0)}
-            to {transform: translateX(-51%)}
+        align-items: center;
+        justify-content: center;
+        
+        & > svg {
+            color: rgba(169, 0, 255, 1);
+            filter: drop-shadow(0 0 2px rgba(169, 0, 255, 1));
         }
 
-        & > li {
-            display: flex;
-            gap: 0.4rem;
+        :hover {
+            background:
+            linear-gradient(to right, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 0,
+            linear-gradient(to right, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 100%,
+            linear-gradient(to left, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 0,
+            linear-gradient(to left, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 100%,
+            linear-gradient(to bottom, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 0,
+            linear-gradient(to bottom, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 0,
+            linear-gradient(to top, rgba(169, 0, 255, 1) 2px, transparent 1px) 0 100%,
+            linear-gradient(to top, rgba(169, 0, 255, 1) 2px, transparent 1px) 100% 100%;
 
-            font-size: 1.6rem;
-            font-family: Gugi, sans-serif;
-            font-weight: 400;
-
-            & > span {
-                display: flex;
-                align-items: center;
-                color: rgba(9, 200, 218, 1);
-                text-shadow: 0 0 10px rgba(9, 200, 218, 1);
-
-                & > svg {
-                    filter: drop-shadow(0 0 2px rgba(9, 200, 218, 1));
-                }
-            }
+            background-repeat: no-repeat;
+            background-size: 10px 10px;
         }
     }
 `
+
 const InfoButton = styled.div`
     width: 0.3rem;
     overflow: hidden;
@@ -476,7 +486,7 @@ const InfoButton = styled.div`
     transition: 0.3s width;
 `
 
-const CircleWrapper = styled.div`
+const CircleWrapper = styled.div<{ showInfo: boolean }>`
     background-color: rgb(16, 16, 16);
     width: 4rem;
     height: 4rem;
@@ -502,6 +512,9 @@ const CircleWrapper = styled.div`
         position: absolute;
         width: 100%;
         height: 100%;
+
+        transform: rotate(${props => props.showInfo ? "45" : "0"}deg);
+        transition: 0.3s transform;
 
         & > div {
             top: 0;
@@ -550,12 +563,12 @@ const CircleWrapper = styled.div`
     }
 `
 
-const TextContainer = styled.div`
+const TextContainer = styled.div<{ showInfo: boolean }>`
 
     padding: 0rem;
     border: 0.1rem solid #09C8DA;
     border-radius: 0.4rem;
-    border-left: 0;
+    border-right: 0;
 
     display: flex;
     align-items: center;
@@ -563,34 +576,41 @@ const TextContainer = styled.div`
 
     transition: 0.3s width, 0.3s height, 0.3s padding;
 
-    &> div {
+    & > div {
         width: 7.4rem;
         height: 2.4rem;
-        font-family: Gugi, sans-serif;
-        font-size: 1.2rem;
-        letter-spacing: 0.6rem;
-        padding: 0.4rem 0.6rem;
         
-        color: rgba(9, 200, 218, 0.8);
-        text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
-        background-color: rgba(9, 200, 218, 0.4);
-        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+        & > div {
+            width: 100%;
+            height: 100%;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-        transition: 0.3s background-color;
-       
+            font-family: Gugi, sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.4rem;
+
+            color: ${props => props.showInfo ? "rgba(255,255,0, 1)" : "rgba(9, 200, 218, 1)"};
+            text-shadow:  ${props => props.showInfo ? "0 0 10px rgba(255,255,0, 1)" : "0 0 10px rgba(9, 200, 218, 0.8)"};
+            background-color: ${props => props.showInfo ? "rgba(255,255,0,0.2)" : " rgba(9, 200, 218, 0.4)"};
+            box-shadow: ${props => props.showInfo ? "rgba(255,255,0, 0.2) 0 0 10px" : "0 0 10px rgba(9, 200, 218, 0.4)"};
+
+            transition: 0.3s color, 0.3s text-shadow, 0.3s background-color, 0.3s box-shadow;
+        }  
     }
+
+    
 `
 
-const InfoButtonContainer = styled.div`
-    
+const InfoButtonContainer = styled.div<{ showInfo: boolean }>`
     width: 100%;
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
     align-items: center;
-    gap: 0rem;
+    padding-right: 0.2rem;    
     cursor: pointer;
     
 
@@ -629,43 +649,82 @@ const InfoButtonContainer = styled.div`
             padding: 0.6rem;
 
             & > div {
-                animation: flicker 1s linear forwards;
-                @keyframes flicker {
+                animation: ${props => props.showInfo ? "yellow-flicker" : "blue-flicker"} 1s linear forwards;
+                @keyframes yellow-flicker {
+                    0% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.2);
+                        box-shadow:rgba(255,255,0, 0.2) 0 0 10px;
+
+                    }
+                    80% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.4);
+                        box-shadow:rgba(255,255,0, 0.4) 0 0 10px;
+                    }
+                    85% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.2);
+                        box-shadow:rgba(255,255,0, 0.2) 0 0 10px;
+                    }
+                    90% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.4);
+                        box-shadow:rgba(255,255,0, 0.4) 0 0 10px;
+                    }
+                    95% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.2);
+                        box-shadow:rgba(255,255,0, 0.2) 0 0 10px;
+                    }
+                    100% {
+                        color: rgba(255,255,0, 1);
+                        text-shadow: 0 0 10px rgba(255,255,0, 1);
+                        background-color: rgba(255,255,0,0.4);
+                        box-shadow:rgba(255,255,0, 0.4) 0 0 10px;
+                    }
+                }
+                @keyframes blue-flicker {
                     0% {
                         color: rgba(9, 200, 218, 0.8);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
-                        background-color: rgba(9, 200, 218, 0.4);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                        background-color: rgba(9, 200, 218, 0.2);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.2);
                     }
                     80% {
                         color: rgba(9, 200, 218, 1);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 1);
-                        background-color: rgba(9, 200, 218, 0.6);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
                     }
                     85% {
                         color: rgba(9, 200, 218, 0.8);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
-                        background-color: rgba(9, 200, 218, 0.4);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                        background-color: rgba(9, 200, 218, 0.2);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.2);
                     }
                     90% {
                         color: rgba(9, 200, 218, 1);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 1);
-                        background-color: rgba(9, 200, 218, 0.6);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
                     }
                     95% {
                         color: rgba(9, 200, 218, 0.8);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
-                        background-color: rgba(9, 200, 218, 0.4);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                        background-color: rgba(9, 200, 218, 0.2);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.2);
                     }
                     100% {
                         color: rgba(9, 200, 218, 1);
                         text-shadow: 0 0 10px rgba(9, 200, 218, 1);
-                        background-color: rgba(9, 200, 218, 0.6);
-                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
                     }
                 }
             }
