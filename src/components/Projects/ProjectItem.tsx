@@ -56,8 +56,8 @@ export function ProjectItem({ itemData }: IProps) {
                         </ul>
                     </SkillsContainer>
                 </SubHeader>
+                <HorizontalRule />
                 <PreviewSection>
-
                     <DeviceSelectorContainer>
                         <DeviceSelectorWrapper deviceListLength={deviceList.length}>
 
@@ -96,28 +96,44 @@ export function ProjectItem({ itemData }: IProps) {
                         </DevicesWrapper>
                     </DevicesContainer>
                 </PreviewSection>
+                <HorizontalRule />
                 <InfoSection>
                     <InfoButtonContainer>
-                        <InfoButton>
-                            i
-                        </InfoButton>
-                        <div className="dotted-border"></div>
-                        <div className="radius-borders">
-                            <div>
-                                <div />
-                                <div />
-                                <div />
-                                <div />
+                        <CircleWrapper>
+                            <InfoButton>
+                                info
+                            </InfoButton>
+                            <div className="dotted-border"></div>
+                            <div className="radius-borders">
+                                <div>
+                                    <div />
+                                    <div />
+                                    <div />
+                                    <div />
+                                </div>
                             </div>
-                        </div>
+                        </CircleWrapper>
+                        <TextContainer>
+                            <div>
+                                MAIS
+                            </div>
+                        </TextContainer>
                     </InfoButtonContainer>
                     <LinksContainer>
-                        <a href="">
-                            <AiOutlineGithub />
-                        </a>
-                        <a href="">
-                            <AiOutlineLink />
-                        </a>
+                        <div>
+                            <span>L</span>
+                            <span>I</span>
+                            <span>N</span>
+                            <span>K</span>
+                        </div>
+                        <LinksWrapper>
+                            <a href="">
+                                <AiOutlineGithub />
+                            </a>
+                            <a href="">
+                                <AiOutlineLink />
+                            </a>
+                        </LinksWrapper>
                     </LinksContainer>
                 </InfoSection>
                 <Overlay />
@@ -129,14 +145,26 @@ export function ProjectItem({ itemData }: IProps) {
 const Item = styled.li`
     width: 100%;
     border: 0.1rem solid #09C8DA;
-    
-    box-shadow:  rgb(9, 200, 218, 0.7) 0 0 10px, inset 0 0 10px  rgb(9, 200, 218, 0.7) ;
-
+    box-shadow:  rgba(9, 200, 218, 0.7) 0 0 10px, inset 0 0 10px  rgb(9, 200, 218, 0.7);
     display: flex;
     flex-direction: column;
     align-items: center;
-
     position: relative
+`
+
+const HorizontalRule = styled.hr`
+    width: 100%;
+    border: 0;
+    padding: 1rem;
+
+    &::after {
+        content:"";
+        display: block;
+        width: 100%;
+        height: 0.1rem;
+        background-color: rgba(9, 200, 218, 0.4);
+        box-shadow:  rgba(9, 200, 218, 0.4) 0 0 10px;
+    }
 
 `
 
@@ -172,15 +200,38 @@ const SubHeader = styled.div`
     gap: 1rem;
 
     font-family: Gugi, sans-serif;
-    padding: 0.4rem 2rem 0.4rem 1rem;
-
-   
+    padding: 0.4rem 1rem;
 `
 
 const LinksContainer = styled.div`
     display: flex;
+    flex-direction: column;
+    border: 0.1rem solid #09C8DA;
+    box-shadow:  rgba(9, 200, 218, 0.7) 0 0 10px, inset 0 0 10px  rgb(9, 200, 218, 0.7);
+
+    & > div:first-child{
+        background-color:rgba(9, 200, 218, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Gugi, sans-serif;
+        gap: 1rem;
+        color: #09C8DA;
+
+        &> span{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    
+`
+
+const LinksWrapper = styled.div`
+    display: flex;
     align-items: center;
-    gap: 1rem;
+    padding: 0.8rem;
+    gap: 0.4rem;
 
     & > a {
 
@@ -194,7 +245,7 @@ const LinksContainer = styled.div`
         justify-content: center;
         
         & > svg {
-            color: rgba(169, 0, 255, 0.6);
+            color: rgba(169, 0, 255, 1);
             filter: drop-shadow(0 0 2px rgba(169, 0, 255, 1));
         }
 
@@ -211,12 +262,6 @@ const LinksContainer = styled.div`
 
             background-repeat: no-repeat;
             background-size: 10px 10px;
-
-            & > svg {
-                color: rgba(169, 0, 255, 1);
-                text-shadow: 0 0 10px rgba(169, 0, 255, 1);
-                filter: drop-shadow(0 0 2px rgba(169, 0, 255, 1));
-            }
         }
     }
 `
@@ -417,29 +462,43 @@ const SkillsContainer = styled.div`
         }
     }
 `
+const InfoButton = styled.div`
+    width: 0.3rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: Gugi, sans-serif;
+    color:rgba(255, 255, 255, 1);
+    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
+    font-weight: bold;
 
-const InfoButtonContainer = styled.div`
+    transition: 0.3s width;
+`
+
+const CircleWrapper = styled.div`
+    background-color: rgb(16, 16, 16);
+    width: 4rem;
+    height: 4rem;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     cursor: pointer;
+    font-size: 1.2rem;
 
     & > .dotted-border {
         width: 80%;
         height: 80%;
         position: absolute;
 
-        
         box-shadow:  rgba(255,255,0, 0.2) 0 0 10px;
-
         border: 0.2rem dashed rgba(255,255,0, 1);
         border-radius: 100%;
-        transition: 0.3s transform ease-out;
+        transition: 0.3s transform ease-out, 0.3s height, 0.3s width;
     }
 
     & > .radius-borders {
-
         position: absolute;
         width: 100%;
         height: 100%;
@@ -489,11 +548,64 @@ const InfoButtonContainer = styled.div`
             }
         }
     }
+`
+
+const TextContainer = styled.div`
+
+    padding: 0rem;
+    border: 0.1rem solid #09C8DA;
+    border-radius: 0.4rem;
+    border-left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s width, 0.3s height, 0.3s padding;
+
+    &> div {
+        width: 7.4rem;
+        height: 2.4rem;
+        font-family: Gugi, sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 0.6rem;
+        padding: 0.4rem 0.6rem;
+        
+        color: rgba(9, 200, 218, 0.8);
+        text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
+        background-color: rgba(9, 200, 218, 0.4);
+        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: 0.3s background-color;
+       
+    }
+`
+
+const InfoButtonContainer = styled.div`
+    
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0rem;
+    cursor: pointer;
+    
 
     :hover {
+
+        ${InfoButton} {
+            width: 2.2rem;
+        }
+
         .dotted-border{
+            width: 100%;
+            height: 100%;
             transform: rotate(calc(-360deg * 2));
         }
+
         .radius-borders {
             & > div {
                 div:nth-child(1){
@@ -512,17 +624,53 @@ const InfoButtonContainer = styled.div`
                 } 
             }
         }
+
+        ${TextContainer} {
+            padding: 0.6rem;
+
+            & > div {
+                animation: flicker 1s linear forwards;
+                @keyframes flicker {
+                    0% {
+                        color: rgba(9, 200, 218, 0.8);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                    }
+                    80% {
+                        color: rgba(9, 200, 218, 1);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 1);
+                        background-color: rgba(9, 200, 218, 0.6);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                    }
+                    85% {
+                        color: rgba(9, 200, 218, 0.8);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                    }
+                    90% {
+                        color: rgba(9, 200, 218, 1);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 1);
+                        background-color: rgba(9, 200, 218, 0.6);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                    }
+                    95% {
+                        color: rgba(9, 200, 218, 0.8);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 0.8);
+                        background-color: rgba(9, 200, 218, 0.4);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.4);
+                    }
+                    100% {
+                        color: rgba(9, 200, 218, 1);
+                        text-shadow: 0 0 10px rgba(9, 200, 218, 1);
+                        background-color: rgba(9, 200, 218, 0.6);
+                        box-shadow: 0 0 4px rgba(9, 200, 218, 0.6);
+                    }
+                }
+            }
+        }
+
     }
 `
 
-const InfoButton = styled.div`
-    width: 4rem;
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Gugi, sans-serif;
-    color:rgba(255, 255, 255, 1);
-    text-shadow: 0 0 2px rgba(255, 255, 255, 1);
-    font-weight: bold;
-`
