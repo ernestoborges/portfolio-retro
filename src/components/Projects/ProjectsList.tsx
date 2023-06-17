@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { ProjectItem } from "./ProjectItem"
-import {IoLogoReact, IoLogoCss3} from "react-icons/io5"
+import {IoLogoReact, IoLogoCss3, IoLogoHtml5, IoLogoJavascript} from "react-icons/io5"
 import {TbBrandTypescript} from "react-icons/tb"
 import {AiFillApi} from "react-icons/ai"
 import {GiRobotGrab} from "react-icons/gi"
@@ -36,9 +36,9 @@ export function ProjectsList() {
             desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />},
-                {name: "javascript", icon: ()=> <IoLogoReact />}, 
+                {name: "javascript", icon: ()=> <IoLogoJavascript />}, 
                 {name: "restful", icon: ()=> <AiFillApi />},
-                {name: "html", icon: ()=> <IoLogoReact />},  
+                {name: "html", icon: ()=> <IoLogoHtml5 />},  
                 {name: "css", icon: ()=> <IoLogoCss3 />},
             ]
         },
@@ -53,9 +53,9 @@ export function ProjectsList() {
             desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />},
-                {name: "javascript", icon: ()=> <IoLogoReact />}, 
+                {name: "javascript", icon: ()=> <IoLogoJavascript />}, 
                 {name: "restful", icon: ()=> <AiFillApi />},
-                {name: "html", icon: ()=> <IoLogoReact />},  
+                {name: "html", icon: ()=> <IoLogoHtml5 />},  
                 {name: "css", icon: ()=> <IoLogoCss3 />},
             ]
         },
