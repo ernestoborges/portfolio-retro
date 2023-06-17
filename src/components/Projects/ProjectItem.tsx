@@ -13,6 +13,7 @@ interface IProps {
             tablet: boolean
             desktop: boolean
         }
+        desc: string
         skills: {
             name: string;
             icon: () => JSX.Element;
@@ -83,29 +84,35 @@ export function ProjectItem({ itemData }: IProps) {
                             <div></div>
                         </AlertBar>
                     </DeviceSelectorContainer>
-                    <DevicesContainer>
-                        <DevicesWrapper
-                            selectedDevice={selectedDevice}
-                        >
-                            {
-                                deviceList.map((device, index) =>
-                                    <div
-                                        key={index}
-                                        className={device}
-                                    >
-                                        <img src={`/images/projects/${itemData.folder}/${device}.png`} />
-                                    </div>
-                                )
-                            }
-                        </DevicesWrapper>
-                        
+                    <DevicesContainer showInfo={showInfo}>
+                        <div>
+                            <DevicesWrapper
+                                selectedDevice={selectedDevice}
+                            >
+                                {
+                                    deviceList.map((device, index) =>
+                                        <div
+                                            key={index}
+                                            className={device}
+                                        >
+                                            <img src={`/images/projects/${itemData.folder}/${device}.png`} />
+                                        </div>
+                                    )
+                                }
+                            </DevicesWrapper>
+                            <DescriptionContainer showInfo={showInfo}>
+                                <p>
+                                    {itemData.desc}
+                                </p>
+                            </DescriptionContainer>
+                        </div>
                     </DevicesContainer>
                 </PreviewSection>
                 <HorizontalRule />
                 <InfoSection>
-                    <InfoButtonContainer 
+                    <InfoButtonContainer
                         showInfo={showInfo}
-                        onClick={()=>setShowInfo(!showInfo)}
+                        onClick={() => setShowInfo(!showInfo)}
                     >
                         <CircleWrapper showInfo={showInfo}>
                             <InfoButton>
@@ -277,7 +284,8 @@ const PreviewSection = styled.div`
 
 const DevicesWrapper = styled.div<{ selectedDevice: number }>`
     display: grid;
-    grid-template-columns: repeat(3, 240px);
+    grid-template-columns: repeat(3, 236px);
+    grid-template-rows: 20rem;
     justify-items: center;
     align-items: center;
 
@@ -298,19 +306,48 @@ const DevicesWrapper = styled.div<{ selectedDevice: number }>`
 
 `
 
+const DescriptionContainer = styled.div<{ showInfo: boolean }>`
+    width: 100%;
+    height: 20rem;
+    background-color: rgba(9, 200, 218, 0.2);
+    border: 0.1rem solid rgba(9, 200, 218, 1);
+    padding: 0.4rem 1rem;
+    
+    font-family: Gugi, sans-serif;
+    font-size: 1.2rem;
+    text-align: justify;
 
-const DevicesContainer = styled.div`
-    width: 24rem;
-    display: flex;
-    align-items: center;
+    & > p {
+        overflow: hidden;
+        // white-space: nowrap;
+
+        animation: ${props => props.showInfo && "typing" } 2s linear forwards;
+        @keyframes typing {
+            from { height: 0%}
+            to { height: 100%}
+        }
+    }
+
+`
+
+const DevicesContainer = styled.div<{ showInfo: boolean }>`
+    width: 22rem;
+    height: 20rem;
     overflow: hidden;
-   
+
+    & > div {
+        display: flex;
+        flex-direction: column;
+        transform: translateY(${props => props.showInfo ? "-20" : "0"}rem);
+        transition: 0.3s transform;
+    }
+    
     & .tablet {
 
         & > img {
             border-radius: 1rem;
-            width: 12rem;
-            height: calc(12rem * 1.6);
+            width: 11rem;
+            height: calc(11rem * 1.6);
             border-radius: 1rem;
         }
     }
@@ -423,6 +460,7 @@ const TopTriangle = styled(GoTriangleUp)`
     transform: translate(-50%, -50%) rotate(90deg);
     filter: drop-shadow(0 0 1px rgb(9, 200, 218, 0.7));
 `
+
 const BottomTriangle = styled(GoTriangleUp)`
     color:#09C8DA;
     position: absolute;

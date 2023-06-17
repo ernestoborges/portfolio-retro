@@ -12,7 +12,7 @@ export function ProjectsList() {
             title: "Previsão do Tempo",
             folder: "addressweatherinfo",
             devices: { mobile: true, tablet: true, desktop: true },
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            desc: "Dashboard que disponibiliza informações sobre o tempo de uma determinado local informado pelo usuário. Utiliza api do GoogleMaps em conjunto com a OpenWeather. É possivel selecionar as unidades de medidas e o idioma da aplicação.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />}, 
                 {name: "typescript", icon: ()=> <TbBrandTypescript />}, 
@@ -25,7 +25,20 @@ export function ProjectsList() {
             title: "Calculadora de encontros DnD5e",
             folder: "dndencounter",
             devices: { mobile: true, tablet: true, desktop: true },
-            desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",
+            skills: [
+                {name: "react", icon: ()=> <IoLogoReact />},
+                {name: "javascript", icon: ()=> <IoLogoReact />}, 
+                {name: "restful", icon: ()=> <AiFillApi />},
+                {name: "html", icon: ()=> <IoLogoReact />},  
+                {name: "css", icon: ()=> <IoLogoCss3 />},
+            ]
+        },
+        {
+            title: "Calculadora de encontros DnD5e",
+            folder: "dndencounter",
+            devices: { mobile: true, tablet: true, desktop: true },
+            desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",
             skills: [
                 {name: "react", icon: ()=> <IoLogoReact />},
                 {name: "javascript", icon: ()=> <IoLogoReact />}, 
@@ -50,10 +63,12 @@ export function ProjectsList() {
 }
 
 const List = styled.ul`
+    width: 100%;
+    max-width: 130rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, 310px);
-    row-gap: 3rem;
-    column-gap: 1rem;
+    row-gap: 4rem;
+    column-gap: 4rem;
     grid-auto-flow: dense;
     justify-content: space-evenly;
 `

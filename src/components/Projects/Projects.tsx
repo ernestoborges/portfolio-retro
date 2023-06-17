@@ -18,7 +18,8 @@ export function Projects(){
 }
 
 const Container = styled.div`
-  background-color: #101010;
+    width: 100%;
+    background-color: #101010;
 
 `
 
@@ -26,4 +27,8 @@ const Header = styled.div`
 `
 
 const Content = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
