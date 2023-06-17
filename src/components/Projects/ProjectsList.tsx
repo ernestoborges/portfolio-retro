@@ -10,6 +10,10 @@ export function ProjectsList() {
     const projectsList = [
         {
             title: "Previsão do Tempo",
+            links: {
+                live: "https://addressweatherinfo.netlify.app",
+                gitub: "https://github.com/ernestoborges/address-weather-info",
+            },
             folder: "addressweatherinfo",
             devices: { mobile: true, tablet: true, desktop: true },
             desc: "Dashboard que disponibiliza informações sobre o tempo de uma determinado local informado pelo usuário. Utiliza api do GoogleMaps em conjunto com a OpenWeather. É possivel selecionar as unidades de medidas e o idioma da aplicação.",
@@ -23,6 +27,10 @@ export function ProjectsList() {
         },
         {
             title: "Calculadora de encontros DnD5e",
+            links: {
+                live: "https://csb-un44vw.netlify.app",
+                gitub: "https://github.com/ernestoborges/dnd5e-encounter-calculator",
+            },
             folder: "dndencounter",
             devices: { mobile: true, tablet: true, desktop: true },
             desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",
@@ -36,6 +44,10 @@ export function ProjectsList() {
         },
         {
             title: "Calculadora de encontros DnD5e",
+            links: {
+                live: "https://csb-un44vw.netlify.app",
+                gitub: "https://github.com/ernestoborges/dnd5e-encounter-calculator",
+            },
             folder: "dndencounter",
             devices: { mobile: true, tablet: true, desktop: true },
             desc: "Simula um 'encontro' entre grupo de jogadores e inimigos no jogo Dungeons and Dragons Edição 5e. Possui uma lista de monstros obtidas pela api Dnd5eAPI e um gerenciador de jogadores no grupo. A aplicação mostra uma tabela de resultados esperados na batalha.",

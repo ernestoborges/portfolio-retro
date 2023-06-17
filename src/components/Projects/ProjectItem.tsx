@@ -7,6 +7,10 @@ import { AiOutlineLink, AiOutlineGithub } from "react-icons/ai"
 interface IProps {
     itemData: {
         title: string
+        links: {
+            live: string
+            gitub: string
+        },
         folder: string
         devices: {
             mobile: boolean
@@ -144,10 +148,10 @@ export function ProjectItem({ itemData }: IProps) {
                             <span>K</span>
                         </div>
                         <LinksWrapper>
-                            <a href="">
+                            <a href={itemData.links.gitub} target="_blank">
                                 <AiOutlineGithub />
                             </a>
-                            <a href="">
+                            <a href={itemData.links.live} target="_blank">
                                 <AiOutlineLink />
                             </a>
                         </LinksWrapper>
