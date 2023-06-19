@@ -21,7 +21,7 @@ export function Home() {
 
     return (
         <>
-            <Container>
+            <Container id="home">
                 <Background>
                     <Sky>
 
@@ -91,6 +91,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     position: relative;
+    padding-top: 6rem;
     overflow: hidden;
 `
 

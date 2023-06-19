@@ -19,6 +19,5 @@ export default function App() {
 const Container = styled.div`
   height: 100%;
   position: relative;
-  padding-top: 6rem;
 
 `

@@ -6,9 +6,9 @@ export function PageHeader(){
             <Container>
                 <Navbar>
                     <List>
-                        <Item>INICIO</Item>
-                        <Item>PROJETOS</Item>
-                        <Item>CONTATO</Item>
+                        <Item><a href="#home">INICIO</a></Item>
+                        <Item><a href="#projects">PROJETOS</a></Item>
+                        <Item><a>CONTATO</a></Item>
                     </List>
                 </Navbar>
             </Container>
@@ -18,6 +18,7 @@ export function PageHeader(){
 
 const Container = styled.header`
     position: fixed;
+    z-index: 999;
     top: 0;
     left: 0;
     width: 100%;

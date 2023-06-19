@@ -5,7 +5,7 @@ export function Projects(){
 
     return (
         <>
-            <Container>
+            <Container id="projects">
                 <Header>
                     <h2>Projetos</h2>
                 </Header>
@@ -20,6 +20,7 @@ export function Projects(){
 const Container = styled.div`
     width: 100%;
     background-color: #101010;
+    padding-top: 6rem;
 
 `
 

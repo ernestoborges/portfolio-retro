@@ -312,11 +312,11 @@ const DevicesWrapper = styled.div<{ selectedDevice: number }>`
 `
 
 const DescriptionContainer = styled.div<{ showInfo: boolean }>`
-    width: 100%;
     height: 20rem;
     background-color: rgba(9, 200, 218, 0.2);
     border: 0.1rem solid rgba(9, 200, 218, 1);
     padding: 0.4rem 1rem;
+    margin-left: 1rem;
     
     font-family: Gugi, sans-serif;
     font-size: 1.2rem;
