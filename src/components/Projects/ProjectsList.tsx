@@ -84,7 +84,7 @@ export function ProjectsList() {
             },
             folder: "multistepform",
             devices: { mobile: true, tablet: true, desktop: true },
-            desc: () => <>Um desafio do Frontend mentor. É um formulário de multiplas etapas com design sugerido pelo desafio. Utilizo a biblioteca Formik para gerenciar o formulário. Além disso, foi meu primeiro projeto utilizando TypeScript</>,
+            desc: () => <>Um desafio do Frontend mentor. É um formulário de multiplas etapas com design sugerido pelo desafio. Utilizo a biblioteca <a href="https://formik.org" target="_blank">Formik</a> para gerenciar o formulário. Além disso, foi meu primeiro projeto utilizando <a href="https://www.typescriptlang.org" target="_blank">TypeScript</a>.</>,
             skills: [
                 { name: "react", icon: () => <IoLogoReact /> },
                 { name: "typescript", icon: () => <TbBrandTypescript />  },
