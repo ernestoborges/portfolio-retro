@@ -17,7 +17,7 @@ interface IProps {
             tablet: boolean
             desktop: boolean
         }
-        desc: string
+        desc: () => JSX.Element
         skills: {
             name: string;
             icon: () => JSX.Element;
@@ -106,7 +106,7 @@ export function ProjectItem({ itemData }: IProps) {
                             </DevicesWrapper>
                             <DescriptionContainer showInfo={showInfo}>
                                 <p>
-                                    {itemData.desc}
+                                    {itemData.desc()}
                                 </p>
                             </DescriptionContainer>
                         </div>
@@ -283,18 +283,19 @@ const PreviewSection = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
     align-items: flex-start;
 `
 
 const DevicesWrapper = styled.div<{ selectedDevice: number }>`
     display: grid;
-    grid-template-columns: repeat(3, 236px);
+    grid-template-columns: repeat(3, 234px);
     grid-template-rows: 20rem;
     justify-items: center;
     align-items: center;
 
     transition: 0.3s transform;
-    transform: translateX(calc( -240px * ${props => props.selectedDevice} ));
+    transform: translateX(calc( -234px * ${props => props.selectedDevice} ));
 
     & > div {
         display: flex;
@@ -332,10 +333,20 @@ const DescriptionContainer = styled.div<{ showInfo: boolean }>`
         }
     }
 
+    & a {
+        color: rgba(9, 200, 218, 0.7 );
+        text-decoration: underline;
+
+        :hover {
+            color: rgba(9, 200, 218, 1 );
+
+        }
+    }
+
 `
 
 const DevicesContainer = styled.div<{ showInfo: boolean }>`
-    width: 22rem;
+    width: 100%;
     height: 20rem;
     overflow: hidden;
 
@@ -374,7 +385,7 @@ const DevicesContainer = styled.div<{ showInfo: boolean }>`
 `
 
 const DeviceSelectorContainer = styled.div`
-    padding: 0 2rem;
+    padding: 0 2rem 0 1.4rem;
     display: flex;
     justify-content: center;
     height: 100%;
